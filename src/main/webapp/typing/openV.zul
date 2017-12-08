@@ -1,0 +1,50 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<?script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"?>
+<?script src="/assets/jquery.panzoom.min.js"?>
+<zk xmlns:z="http://www.w3.org/1999/xhtml">
+    <borderlayout hflex="1" vflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('metseditor.typing.OpenViewModel')">
+        <north height="50px" border="none" >
+            <menubar hflex="1" vflex="1">
+                <menuitem label="${labels.save}" onClick="@command('save')"></menuitem>
+                <menuitem label="${labels.typingDone}" onClick="@command('typingDone')"></menuitem>
+                <menuitem label="${labels.logout}" href="${request.contextPath}/logout/" style="float:right"></menuitem>
+            </menubar>
+
+        </north>
+        <center autoscroll="true">
+            <div>
+            <div zclass="buttons">
+                <button sclass="zoom-in"  iconSclass="z-icon-search-plus" tooltiptext="${labels.zoomIn}"></button>
+                <button sclass="zoom-out" iconSclass="z-icon-search-minus" tooltiptext="${labels.zoomOut}"></button>
+                <button sclass="reset" iconSclass="z-icon-undo" tooltiptext="${labels.reset}"></button>
+            </div>
+            <div sclass="parent">
+
+                <div sclass="panzoom">
+                    <!--     <z:figure class="zoo-item" data-zoo-image="/PageImage/${vm.task.book.classCode}/${vm.task.pageImageName}" data-zoo-scale="3"></z:figure>-->
+                    <image  src="/PageImage/${vm.task.book.classCode}/${vm.task.pageImageName}" width="100%" height="auto"   ></image>
+                </div></div>
+            <z:script>
+                (function () {
+                $(".panzoom").panzoom({
+                minScale: 0,
+                $zoomIn: $(".zoom-in"),
+                $zoomOut:$(".zoom-out"),
+                $reset: $(".reset")
+                });
+                })();
+
+            </z:script>
+            </div>
+        </center>
+        <south height="50%" minsize="30" splittable="true">
+            <z:form style="height: 100%">
+                <label value="${labels.pageNum}"></label><textbox name="pageNum" value="@load(vm.task.pageNum) @save(vm.task.pageNum,before='save')"></textbox>
+                <ckeditor customConfigurationsPath="/assets/ckeditor/fullconfig.js"  value="@load(vm.task.content) @save(vm.task.content,before='save')"   vflex="1" onSave="@command('save')"  >
+                </ckeditor>
+            </z:form>
+        </south>
+
+
+    </borderlayout>
+</zk>

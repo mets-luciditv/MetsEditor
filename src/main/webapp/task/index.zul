@@ -1,0 +1,176 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<?page title="${labels.taskAssignment}"?>
+<?import org.zkoss.util.resource.* ?>
+<zk>
+    <borderlayout hflex="1" vflex="1">
+        <north height="50px" border="none" >
+            <include src="/banner.zul"/>
+        </north>
+<center id="mainContent" autoscroll="true" border="none" >
+
+
+    <grid viewModel="@id('vm') @init('metseditor.task.IndexViewModel')" apply="org.zkoss.bind.BindComposer"
+          model="@load(vm.taskRows) @template((each.inEditing) ? 'editable' : 'noneditable')">
+        <auxhead>
+            <auxheader></auxheader>
+            <auxheader align="center" label="${labels.book_title}"></auxheader>
+            <auxheader label="${labels.classCode}" align="center"    ></auxheader>
+            <auxheader label="${labels.fromPageImageFile}" align="center" ></auxheader>
+            <auxheader label="${labels.toPageImageFile}" align="center"></auxheader>
+            <auxheader label="${labels.typist}" align="center"></auxheader>
+            <auxheader label="${labels.proofreader1}" align="center"  ></auxheader>
+            <auxheader label="${labels.proofreader2}" align="center"  ></auxheader>
+            <auxheader label="${labels.proofreader3}" align="center" ></auxheader>
+        </auxhead>
+        <auxhead>
+            <auxheader colspan="1">
+                <button label="${labels.batchAdd}" onClick="@command('batchNewRow')"></button>
+            </auxheader>
+            <auxheader colspan="1">
+                <combobox model="@load(vm.books)" width="90%" selectedItem="@load(vm.batchBook) @save(vm.batchBook,before={'batchNewRow','batchBookChange'})" onChange="@command('batchBookChange')" >
+                    <template name="model" var="book">
+                        <comboitem label="@load(book.title)"></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <label value="@load(vm.batchClassCode)"></label>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.fromPages)" width="90%" selectedItem="@load(vm.batchFromPage) @save(vm.batchFromPage,before='batchNewRow')" >
+                    <template name="model" var="i">
+                        <comboitem label="@load(i)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.toPages)" width="90%" selectedItem="@load(vm.batchToPage) @save(vm.batchToPage,before='batchNewRow')" >
+                    <template name="model" var="i">
+                        <comboitem label="@load(i)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.typists)" width="90%" selectedItem="@load(vm.batchTypist) @save(vm.batchTypist,before='batchNewRow')" >
+                    <template name="model" var="user">
+                        <comboitem label="@load(user.name)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.proofreaders1)" width="90%" selectedItem="@load(vm.batchProofreader1) @save(vm.batchProofreader1,before='batchNewRow')" >
+                    <template name="model" var="user">
+                        <comboitem label="@load(user.name)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.proofreaders2)" width="90%" selectedItem="@load(vm.batchProofreader2) @save(vm.batchProofreader2,before='batchNewRow')" >
+                    <template name="model" var="user">
+                        <comboitem label="@load(user.name)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+            <auxheader>
+                <combobox model="@load(vm.proofreaders3)" width="90%" selectedItem="@load(vm.batchProofreader3) @save(vm.batchProofreader3,before='batchNewRow')" >
+                    <template name="model" var="user">
+                        <comboitem label="@load(user.name)" ></comboitem>
+                    </template>
+                </combobox>
+            </auxheader>
+        </auxhead>
+        <auxhead>
+            <auxheader colspan="9">
+                <button iconSclass="z-icon-plus" onClick="@command('newRow')"></button>
+            </auxheader>
+
+        </auxhead>
+        <columns>
+            <column label="${labels.edit}" hflex="3"></column>
+            <column label="${labels.book_title}" align="center" hflex="5" sort="auto(task.book.title)" ></column>
+            <column label="${labels.classCode}" align="center"  hflex="2"  ></column>
+            <column label="${labels.pageImageFile}" align="center" hflex="4"></column>
+            <column label="${labels.status}" align="center" hflex="4"></column>
+            <column label="${labels.typist}" align="center" hflex="4" sort="auto(task.typist.name)" ></column>
+            <column label="${labels.proofreader1}" align="center" hflex="4" sort="auto(task.proofreader1.name)" ></column>
+            <column label="${labels.proofreader2}" align="center" hflex="4" sort="auto(task.proofreader2.name)" ></column>
+            <column label="${labels.proofreader3}" align="center" hflex="4" sort="auto(task.proofreader3.name)" ></column>
+        </columns>
+        <rows>
+            <template name="noneditable">
+                <row>
+                    <cell>
+                        <button iconSclass="z-icon-pencil" onClick="@command('edit',row=each)"></button>
+                        <button iconSclass="z-icon-minus" onClick="@command('delete',row=each)"></button>
+                        <button iconSclass="z-icon-thumbs-o-up" onClick="@command('publish',row=each)" tooltiptext="${labels.publish}"></button>
+                        <button iconSclass="z-icon-download" onClick="@command('downloadText',row=each)" tooltiptext="${labels.downloadText}"></button>
+
+                    </cell>
+                    <cell><label value="@load(each.task.book.title)"/></cell>
+                    <cell><label value="@load(each.task.book.classCode)"/></cell>
+                    <cell><label value="@load(each.task.pageImageName)"/></cell>
+                    <cell><label value="@load(Labels.getLabel(each.task.status))"/></cell>
+                    <cell><label value="@load(each.task.typist.name)"/></cell>
+                    <cell><label value="@load(each.task.proofreader1.name)"/></cell>
+                    <cell><label value="@load(each.task.proofreader2.name)"/></cell>
+                    <cell><label value="@load(each.task.proofreader3.name)"/></cell>
+                </row>
+            </template>
+            <template name="editable">
+                <row>
+                    <cell>
+                        <button iconSclass="z-icon-save" onClick="@command('save',row=each)"></button>
+                        <button iconSclass="z-icon-undo" onClick="@command('cancel',row=each)"></button>
+
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.books)" width="90%" selectedItem="@load(each.task.book) @save(each.task.book,before={'save','bookChange'})" onChange="@command('bookChange',row=each)" >
+                            <template name="model" var="book">
+                                <comboitem label="@load(book.title)"></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell><label value="@load(each.task.book.classCode)"/></cell>
+                    <cell>
+                        <combobox model="@load(vm.pages)" width="90%" selectedItem="@load(each.task.pageImageName) @save(each.task.pageImageName,before='save')" >
+                            <template name="model" var="i">
+                                <comboitem label="@load(i)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell><label value="@load(Labels.getLabel(each.task.status))"/></cell>
+                    <cell>
+                        <combobox model="@load(vm.typists)" width="90%" selectedItem="@load(each.task.typist) @save(each.task.typist,before='save')" >
+                            <template name="model" var="user">
+                                <comboitem label="@load(user.name)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.proofreaders1)" width="90%" selectedItem="@load(each.task.proofreader1) @save(each.task.proofreader1,before='save')" >
+                            <template name="model" var="user">
+                                <comboitem label="@load(user.name)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.proofreaders2)" width="90%" selectedItem="@load(each.task.proofreader2) @save(each.task.proofreader2,before='save')" >
+                            <template name="model" var="user">
+                                <comboitem label="@load(user.name)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.proofreaders3)" width="90%" selectedItem="@load(each.task.proofreader3) @save(each.task.proofreader3,before='save')" >
+                            <template name="model" var="user">
+                                <comboitem label="@load(user.name)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                </row>
+            </template>
+        </rows>
+    </grid>
+        </center>
+    </borderlayout>
+</zk>

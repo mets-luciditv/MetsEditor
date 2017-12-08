@@ -1,0 +1,75 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<?page title="${labels.proofread3}" ?>
+<zk>
+    <borderlayout hflex="1" vflex="1">
+        <north height="50px" border="none" >
+            <include src="/banner.zul"/>
+        </north>
+        <center id="mainContent" autoscroll="true" border="none" >
+
+
+    <grid viewModel="@id('vm') @init('metseditor.proofread.IndexViewModel',status='ToProofread3')" apply="org.zkoss.bind.BindComposer"
+          model="@load(vm.taskRows) @template((each.inEditing) ? 'editable' : 'noneditable')">
+        <auxhead>
+            <auxheader colspan="7">
+               <!-- <button iconSclass="z-icon-plus" onClick="@command('newRow')"></button> -->
+            </auxheader>
+        </auxhead>
+        <columns>
+            <column label="${labels.edit}" hflex="3"></column>
+            <column label="${labels.book_title}" align="center" hflex="4" sort="auto(task.book.title)" ></column>
+            <column label="${labels.classCode}" align="center"  hflex="4"  ></column>
+            <column label="${labels.pageImageFile}" align="center" hflex="8"></column>
+            <column label="${labels.typist}" align="center" hflex="6" sort="auto(task.typist.name)" ></column>
+        </columns>
+        <rows>
+            <template name="noneditable">
+                <row>
+                    <cell>
+                       <!-- <button iconSclass="z-icon-pencil" onClick="@command('edit',row=each)"></button>
+                        <button iconSclass="z-icon-minus" onClick="@command('delete',row=each)"></button> -->
+                        <button iconSclass="z-icon-external-link" onClick="@command('open',row=each)"></button>
+                    </cell>
+                    <cell><label value="@load(each.task.book.title)"/></cell>
+                    <cell><label value="@load(each.task.book.classCode)"/></cell>
+                    <cell><label value="@load(each.task.pageImageName)"/></cell>
+                    <cell><label value="@load(each.task.typist.name)"/></cell>
+                </row>
+            </template>
+            <template name="editable">
+                <row>
+                    <cell>
+                        <button iconSclass="z-icon-save" onClick="@command('save',row=each)"></button>
+                        <button iconSclass="z-icon-undo" onClick="@command('cancel',row=each)"></button>
+
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.books)" selectedItem="@load(each.task.book) @save(each.task.book,before={'save','bookChange'})" onChange="@command('bookChange',row=each)" >
+                            <template name="model" var="book">
+                                <comboitem label="@load(book.title)"></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell><label value="@load(each.task.book.classCode)"/></cell>
+                    <cell>
+                        <combobox model="@load(vm.pages)" selectedItem="@load(each.task.pageImageName) @save(each.task.pageImageName,before='save')" >
+                            <template name="model" var="i">
+                                <comboitem label="@load(i)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+                    <cell>
+                        <combobox model="@load(vm.users)" selectedItem="@load(each.task.typist) @save(each.task.typist,before='save')" >
+                            <template name="model" var="user">
+                                <comboitem label="@load(user.name)" ></comboitem>
+                            </template>
+                        </combobox>
+                    </cell>
+
+                </row>
+            </template>
+        </rows>
+    </grid>
+        </center>
+    </borderlayout>
+</zk>

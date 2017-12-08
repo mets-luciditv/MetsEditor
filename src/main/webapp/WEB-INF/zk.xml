@@ -1,0 +1,9 @@
+<zk>
+<library-property>
+    <name>org.zkoss.web.preferred.locale</name>
+    <value>zh_TW</value>
+</library-property>
+<language-config>
+<addon-uri>/WEB-INF/ckez-bind-addon.xml</addon-uri>
+</language-config>
+</zk>

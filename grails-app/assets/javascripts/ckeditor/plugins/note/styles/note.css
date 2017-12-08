@@ -1,0 +1,32 @@
+
+/* Tooltip container */
+.note .notetext{
+    display: none;
+    background-color: yellow;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    width: 400px;
+    height: 200px;
+}
+.note .notehead{
+    background-color: yellow;
+    cursor: pointer;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.notehead:hover+.notetext{
+    display: inline;
+
+}
+.note{
+    position: relative;
+}
+.note.review{
+    display: none;
+}

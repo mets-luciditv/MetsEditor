@@ -1,0 +1,13 @@
+<?import grails.plugin.springsecurity.* ?>
+<div hflex="1" vflex="1"  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('metseditor.zkapp.BannerViewModel')">
+    <menubar>
+        <menuitem label="${labels.UserManagement}"  onClick="@global-command('onNavigate', name='user',uri='/user/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}" />
+        <menuitem label="${labels.BookManagement}"  onClick="@global-command('onNavigate', name='book',uri='/book/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_TYPIST,ROLE_PROOFREADER')}"/>
+        <menuitem label="${labels.taskAssignment}"  onClick="@global-command('onNavigate', name='task',uri='/task/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"/>
+        <menuitem label="${labels.typing}"  onClick="@global-command('onNavigate', name='typing',uri='/typing/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_TYPIST')}"/>
+        <menuitem label="${labels.proofread1}"  onClick="@global-command('onNavigate', name='proofread1',uri='/proofread1/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_PROOFREADER')}"/>
+        <menuitem label="${labels.proofread2}"  onClick="@global-command('onNavigate', name='proofread2',uri='/proofread2/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_PROOFREADER')}"/>
+        <menuitem label="${labels.proofread3}"  onClick="@global-command('onNavigate', name='proofread3',uri='/proofread3/index.zul')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_PROOFREADER')}"/>
+        <menuitem label="${labels.logout}" href="${request.contextPath}/logout" style="float:right"></menuitem>
+    </menubar>
+</div>

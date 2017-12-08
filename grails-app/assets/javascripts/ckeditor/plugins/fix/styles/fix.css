@@ -1,0 +1,15 @@
+del,del ins {
+    text-decoration:none;
+    background-color: #e74c3c;
+}
+ins {
+    text-decoration:none;
+    background-color:#2ecc71;
+    /*text-decoration-color:green;*/
+}
+del.review {
+    display: none;
+}
+ins.review{
+    background-color: inherit;
+}

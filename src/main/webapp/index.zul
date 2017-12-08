@@ -1,0 +1,11 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<zk>
+    <borderlayout hflex="1" vflex="1">
+        <north height="50px" border="none" >
+            <include src="./banner.zul"/>
+        </north>
+        <center id="mainContent" autoscroll="true" border="none">
+
+        </center>
+    </borderlayout>
+</zk>

@@ -1,0 +1,31 @@
+@mixin myfont {
+    font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+body {
+    @include myfont;
+    padding: 0;
+}
+
+[layout=row] {
+    flex-direction: row;
+}
+
+// Override ZK fonts
+// See https://www.zkoss.org/wiki/ZK_Developer's_Reference/Theming_and_Styling/Customizing_Standard_Themes
+[class*="z-"]:not([class*="z-icon-"]) {
+    @include myfont;
+}
+.z-a {
+    font-size: inherit;
+}
+
+.content-header {
+    margin: 1rem 3rem;
+    h1 {
+        border-bottom: 1px solid #666;
+    }
+}
+.content {
+    margin: 1rem 3rem;
+}

@@ -1,0 +1,60 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<?import grails.plugin.springsecurity.* ?>
+<?page title="${labels.BookManagement}"?>
+<zk>
+    <borderlayout hflex="1" vflex="1">
+    <north height="50px" border="none" >
+        <include src="/banner.zul"/>
+    </north>
+
+    <center id="mainContent" autoscroll="true" border="none">
+        <grid viewModel="@id('vm') @init('metseditor.book.IndexViewModel')"  apply="org.zkoss.bind.BindComposer"
+                model="@load(vm.bookRows) @template((each.inEditing) ? 'editable' : 'noneditable')">
+            <auxhead>
+                <auxheader colspan="7">
+                    <button iconSclass="z-icon-plus" onClick="@command('newRow')" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
+
+                </auxheader>
+            </auxhead>
+            <columns>
+                <column label="${labels.edit}" hflex="3"></column>
+                <column label="${labels.classCode}" align="center" hflex="4"></column>
+                <column label="${labels.title}" align="center" hflex="4" ></column>
+                <column label="${labels.author}" align="center"  hflex="4" ></column>
+                <column label="${labels.editor}" align="center" hflex="8"></column>
+                <column label="${labels.publisher}" align="center" hflex="6" ></column>
+            </columns>
+            <rows>
+                <template name="noneditable">
+                <row>
+                    <cell>
+                        <button iconSclass="z-icon-pencil" onClick="@command('edit',row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
+                        <button iconSclass="z-icon-minus" onClick="@command('delete',row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
+                       <button iconSclass="z-icon-upload" upload="true,maxsize=1024000,multiple=true" onUpload="@command('doUploadPhoto', row=each)"></button>
+
+                    </cell>
+                    <cell><label value="@load(each.book.classCode)"/></cell>
+                    <cell><label value="@load(each.book.title)"/></cell>
+                    <cell><label value="@load(each.book.author)"/></cell>
+                    <cell><label value="@load(each.book.editor)"/></cell>
+                    <cell><label value="@load(each.book.publisher)"/></cell>
+                </row>
+                </template>
+                <template name="editable">
+                    <row>
+                        <cell>
+                            <button iconSclass="z-icon-save" onClick="@command('save',row=each)"></button>
+                            <button iconSclass="z-icon-undo" onClick="@command('cancel',row=each)"></button>
+                        </cell>
+                        <cell><textbox value="@load(each.book.classCode) @save(each.book.classCode, before='save')" width="99%" /></cell>
+                        <cell><textbox value="@load(each.book.title) @save(each.book.title, before='save')" width="99%" /></cell>
+                        <cell><textbox value="@load(each.book.author) @save(each.book.author, before='save')" width="99%" /></cell>
+                        <cell><textbox value="@load(each.book.editor) @save(each.book.editor, before='save')" width="99%" /></cell>
+                        <cell><textbox value="@load(each.book.publisher) @save(each.book.publisher, before='save')" width="99%" /></cell>
+                    </row>
+                </template>
+            </rows>
+        </grid>
+    </center>
+    </borderlayout>
+</zk>

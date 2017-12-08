@@ -1,0 +1,35 @@
+
+/* Tooltip container */
+.question .qtext{
+    display: none;
+    background-color:orange;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    width:400px;
+    height: 200px;
+}
+
+.question .qhead{
+    background-color: orange;
+    cursor: pointer;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.qhead:hover + .qtext{
+    display: inline;
+}
+.question[solved="true"]{
+    display: none;
+}
+.question{
+    position: relative;
+}
+.question.review{
+    display: none;
+}

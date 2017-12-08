@@ -1,0 +1,12 @@
+.lb_hidden span.lb{
+    display:none;
+}
+
+span.lb{
+    color:#006400;
+    font-family: Courier New,Courier,monospace;
+}
+
+span.lb:after {
+    content:attr(data-lineid) ":";
+}

@@ -1,0 +1,88 @@
+<?link rel="stylesheet" type="text/css" href="/assets/zkapp/style.css"?>
+<?page title="${labels.UserManagement}" ?>
+<zk>
+    <borderlayout hflex="1" vflex="1">
+        <north height="50px" border="none" >
+            <include src="/banner.zul"/>
+        </north>
+        <center id="mainContent" autoscroll="true" border="none"  >
+            <grid   viewModel="@id('vm') @init('metseditor.user.IndexViewModel')" apply="org.zkoss.bind.BindComposer"
+                    model="@load(vm.userRows) @template((each.inEditing) ? 'editable' : 'noneditable')">
+                <auxhead>
+                    <auxheader colspan="7">
+                        <button iconSclass="z-icon-plus" onClick="@command('newRow')"></button>
+                    </auxheader>
+                </auxhead>
+                <columns>
+                    <column label="${labels.edit}" hflex="3"></column>
+                    <column label="${labels.account_name}" align="center" hflex="4" ></column>
+                    <column label="${labels.user_name}" align="center"  hflex="4" ></column>
+                    <column label="${labels.role}" align="center" hflex="8"></column>
+                    <column label="${labels.email}" align="center" hflex="6" ></column>
+                    <column label="${labels.password}" align="center" hflex="4"></column>
+                    <column label="${labels.enabled}" align="center" hflex="2"></column>
+
+                </columns>
+                <rows>
+                    <template name="noneditable">
+                        <row>
+                            <cell>
+                                <button iconSclass="z-icon-pencil" onClick="@command('edit',row=each)"></button>
+                            </cell>
+                            <cell>
+                                <label value="@load(each.user.username)" width="99%" />
+                            </cell>
+                            <cell>
+                                <label value="@load(each.user.name)" width="99%" />
+                            </cell>
+                            <cell>
+
+                                <checkbox label="${labels.administrator}" value="ROLE_ADMIN" checked="@load(each.isMemberOfAdmin)" disabled="true"/>
+                                <checkbox label="${labels.typist}" value="ROLE_TYPIST" checked="@load(each.isMemberOfTypist)" disabled="true"/>
+                                <checkbox label="${labels.proofreader}" value="ROLE_PROOFREADER" checked="@load(each.isMemberOfProofreader)" disabled="true"/>
+
+                            </cell>
+                            <cell>
+                                <label
+                                        value="@load(each.user.email)" width="99%" />
+                            </cell>
+
+                            <cell></cell>
+                            <cell>
+                                <checkbox
+                                        checked="@load(each.user.enabled)" width="99%" disabled="true"></checkbox>
+                            </cell>
+
+
+
+                        </row>
+                    </template>
+                    <template name="editable">
+                        <row>
+                            <div>
+                                <button iconSclass="z-icon-save" onClick="@command('save',row=each)"></button>
+                                <button iconSclass="z-icon-undo" onClick="@command('cancel',row=each)"></button>
+                            </div>
+                            <textbox
+                                    value="@load(each.user.username) @save(each.user.username, before='save')" width="99%" />
+                            <textbox
+                                    value="@load(each.user.name) @save(each.user.name, before='save')" width="99%" />
+                            <div>
+                                <checkbox label="${labels.administrator}" value="ROLE_ADMIN" checked="@load(each.isMemberOfAdmin) @save(each.isMemberOfAdmin, before='save')"/>
+                                <checkbox label="${labels.typist}" value="ROLE_TYPIST" checked="@load(each.isMemberOfTypist) @save(each.isMemberOfTypist, before='save')"/>
+                                <checkbox label="${labels.proofreader}" value="ROLE_PROOFREADER" checked="@load(each.isMemberOfProofreader) @save(each.isMemberOfProofreader, before='save')"/>
+                            </div>
+                            <textbox
+                                    value="@load(each.user.email) @save(each.user.email, before='save')" width="99%" />
+                            <textbox type="password"
+                                     value="@load(each.user.password) @save(each.user.password, before='save')" width="99%" />
+                            <checkbox
+                                    checked="@load(each.user.enabled) @save(each.user.enabled, before='save')" width="99%"></checkbox>
+
+                        </row>
+                    </template>
+                </rows>
+            </grid>
+        </center>
+    </borderlayout>
+</zk>
