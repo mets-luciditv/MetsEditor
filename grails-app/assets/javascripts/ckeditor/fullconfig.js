@@ -5,10 +5,11 @@ CKEDITOR.plugins.addExternal( 'linenumber', '/MetsEditor/assets/ckeditor/plugins
 CKEDITOR.plugins.addExternal( 'mets_enterkey', '/MetsEditor/assets/ckeditor/plugins/mets_enterkey/','plugin.js' );
 CKEDITOR.plugins.addExternal( 'showlinenumber', '/MetsEditor/assets/ckeditor/plugins/showlinenumber/','plugin.js' );
 CKEDITOR.plugins.addExternal( 'lineheight', '/MetsEditor/assets/ckeditor/plugins/lineheight/','plugin.js' );
+CKEDITOR.plugins.addExternal( 'note', '/MetsEditor/assets/ckeditor/plugins/note/','plugin.js' );
 CKEDITOR.editorConfig = function(config) {
-    config.contentsCss = '/MetsEditor/assets/ckeditor/contents.css';
+    config.contentsCss = ['/MetsEditor/assets/ckeditor/contents.css','/MetsEditor/assets/css/fontawesome-all.css'];
     config.font_names='Monlam Uni OuChan2;'+config.font_names;
-   config.extraPlugins = 'linenumber,mets_enterkey,showlinenumber,lineheight';
+   config.extraPlugins = 'linenumber,mets_enterkey,showlinenumber,lineheight,note';
     config.allowedContent=true;
     config.toolbar = [
         { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
@@ -22,7 +23,7 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize','lineheight' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
-        { name: 'mets' , items: ['Linenumber','showlinenumber']}
+        { name: 'mets' , items: ['Linenumber','showlinenumber','Note']}
     ];
     //config.newpage_html = '<br class="lb_br" style="display: none;"/>&nbsp;';
     //config.protectedSource.push(/<span[^>]*><\/span>/g);

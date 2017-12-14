@@ -1,32 +1,26 @@
+span.note span.note-title{
+    background: yellow;
 
-/* Tooltip container */
-.note .notetext{
-    display: none;
-    background-color: yellow;
+}
+span.note[data-note-type=gloss]:before {
+    content:"["attr(data-note-no)"]";
+    vertical-align: super;
+    color:Tomato;
+    font-size:small;
+}
+span.note[data-note-type=Proof]:before {
+    content:attr(data-note-no);
+    background: Tomato;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1em;
     text-align: center;
-    padding: 5px;
-    border-radius: 6px;
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-    width: 400px;
-    height: 200px;
-}
-.note .notehead{
-    background-color: yellow;
-    cursor: pointer;
-}
-/* Show the tooltip text when you mouse over the tooltip container */
-.notehead:hover+.notetext{
-    display: inline;
+    width: 1em;
+    vertical-align: super;
 
-}
-.note{
-    position: relative;
-}
-.note.review{
-    display: none;
+    font-size:small;
 }

@@ -4,7 +4,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 @font-face {
 	font-family: "Monlam Uni OuChan2";
-	src: url("/MetsEditor/assets/Monlam_Uni_OuChan2.ttf");
+	src: url("../fonts/Monlam_Uni_OuChan2.ttf");
 }
 body
 {
