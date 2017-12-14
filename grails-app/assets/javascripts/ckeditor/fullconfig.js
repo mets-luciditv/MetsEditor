@@ -4,9 +4,11 @@ CKEDITOR.plugins.addExternal( 'widget', '/MetsEditor/assets/ckeditor/plugins/wid
 CKEDITOR.plugins.addExternal( 'linenumber', '/MetsEditor/assets/ckeditor/plugins/linenumber/','plugin.js' );
 CKEDITOR.plugins.addExternal( 'mets_enterkey', '/MetsEditor/assets/ckeditor/plugins/mets_enterkey/','plugin.js' );
 CKEDITOR.plugins.addExternal( 'showlinenumber', '/MetsEditor/assets/ckeditor/plugins/showlinenumber/','plugin.js' );
+CKEDITOR.plugins.addExternal( 'lineheight', '/MetsEditor/assets/ckeditor/plugins/lineheight/','plugin.js' );
 CKEDITOR.editorConfig = function(config) {
+    config.contentsCss = '/MetsEditor/assets/ckeditor/contents.css';
     config.font_names='Monlam Uni OuChan2;'+config.font_names;
-   config.extraPlugins = 'linenumber,mets_enterkey,showlinenumber';
+   config.extraPlugins = 'linenumber,mets_enterkey,showlinenumber,lineheight';
     config.allowedContent=true;
     config.toolbar = [
         { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
@@ -17,7 +19,7 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
         { name: 'insert', items: [ 'Image',  'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak' ] },
         '/',
-        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize','lineheight' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
         { name: 'mets' , items: ['Linenumber','showlinenumber']}
