@@ -25,7 +25,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/proofread2/**', access: ['ROLE_ADMIN','ROLE_PROOFREADER']],
 	[pattern: '/proofread3/**', access: ['ROLE_ADMIN','ROLE_PROOFREADER']],
 	[pattern: '/*', access: ['isAuthenticated()']],
-		[pattern: '/PageImage/**',access: ['isAuthenticated()']]
+	[pattern: '/PageImage/**',access: ['isAuthenticated()']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

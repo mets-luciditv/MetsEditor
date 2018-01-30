@@ -78,7 +78,6 @@ class IndexViewModel {
             book.classCode=row.book.classCode
             book.editor=row.book.editor
             book.publisher=row.book.publisher
-            book.fileType=row.book.fileType
             row.book=book
         }
         if(row.book.save(flush:true)){
@@ -125,5 +124,8 @@ class IndexViewModel {
     def teip5(@BindingParam('row') BookRow row){
         teiP5Service.createXmlByBookId(row.book.id)
     }
-
+    @Command
+    def open(@BindingParam('row') BookRow row){
+        Executions.getCurrent().sendRedirect("./edit.zul?book=${row.book.id}","_blank")
+    }
 }

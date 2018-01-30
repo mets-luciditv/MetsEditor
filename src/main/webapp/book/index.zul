@@ -30,8 +30,8 @@
                     <cell>
                         <button iconSclass="z-icon-pencil" onClick="@command('edit',row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
                         <button iconSclass="z-icon-minus" onClick="@command('delete',row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
-                       <button iconSclass="z-icon-upload" upload="true,maxsize=1024000,multiple=true" onUpload="@command('doUploadPhoto', row=each)"></button>
-
+                        <button iconSclass="z-icon-upload" upload="true,maxsize=1024000,multiple=true" onUpload="@command('doUploadPhoto', row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
+                        <button iconSclass="z-icon-book" tooltiptext="${labels.book_edit}" onClick="@command('open', row=each)" if="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}"></button>
                     </cell>
                     <cell><label value="@load(each.book.classCode)"/></cell>
                     <cell><label value="@load(each.book.title)"/></cell>

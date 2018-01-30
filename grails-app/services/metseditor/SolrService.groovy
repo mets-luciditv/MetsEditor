@@ -12,6 +12,24 @@ import javax.xml.transform.stream.StreamSource
 @Transactional
 class SolrService {
     def grailsApplication
+    int publish(Book book){
+        def urlString = grailsApplication.config.getProperty("app.solrUrl")
+        SolrClient solr = new HttpSolrClient.Builder(urlString).build()
+        def document = new SolrInputDocument()
+        document.addField("jing_id", book.classCode)
+        document.addField("jing_title",book.title)
+        document.addField("author",book.author.split(","))
+        document.addField("html",book.content)
+        document.addField("text",extractText("<div>"+book.content+"</div>"))
+        document.addField("volume_id","")
+        document.addField("volume_title","")
+        document.addField("id",book.id)
+        def response = solr.add(document)
+        if(response.status==0){
+            return solr.commit().status
+        }
+        return response.status
+    }
     int publish(Task task) {
         def urlString = grailsApplication.config.getProperty("app.solrUrl")
         SolrClient solr = new HttpSolrClient.Builder(urlString).build()
@@ -31,7 +49,7 @@ class SolrService {
         document.addField("volume_id","")
         document.addField("volume_title","")
 
-        document.addField("id","${task.book.classCode}P${pageStr}")
+        document.addField("id",task.book.id)
         def response = solr.add(document)
         if(response.status==0){
             return solr.commit().status

@@ -6,4 +6,7 @@
 <language-config>
 <addon-uri>/WEB-INF/ckez-bind-addon.xml</addon-uri>
 </language-config>
+<system-config>
+    <max-upload-size>51200</max-upload-size>
+</system-config>
 </zk>

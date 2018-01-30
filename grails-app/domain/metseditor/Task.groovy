@@ -2,7 +2,10 @@ package metseditor
 
 import groovy.transform.EqualsAndHashCode
 
+import javax.persistence.Id
+
 class Task {
+
     String pageImageName
     String content
     String status
@@ -16,4 +19,5 @@ class Task {
     static mapping={
         content type:"text"
     }
+
 }
