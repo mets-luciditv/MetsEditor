@@ -17,6 +17,8 @@ class Book {
     String publisher
     //書名
     String title
+    //叢書分冊、分卷
+    String volume_title
     //書碼、經號
     String classCode
     //完書內容
@@ -29,6 +31,7 @@ class Book {
         publisher nullable: true
         content nullable: true
         author nullable: true
+        volume_title nullable: true
     }
     static mapping={
         content type:"text"

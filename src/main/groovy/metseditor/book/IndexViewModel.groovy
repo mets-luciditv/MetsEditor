@@ -65,7 +65,7 @@ class IndexViewModel {
     def save(@BindingParam('row') BookRow row){
         if(row.isNew) {
             def pageImageRoot=grailsApplication.config.getProperty("app.pageImageRoot")
-            def folder=new File("${pageImageRoot}/${row.book.classCode}")
+            def folder=new File("${pageImageRoot}/${row.book.id}")
             if(!folder.exists()){
                 folder.mkdir()
             }
@@ -78,6 +78,7 @@ class IndexViewModel {
             book.classCode=row.book.classCode
             book.editor=row.book.editor
             book.publisher=row.book.publisher
+            book.volume_title=row.book.volume_title
             row.book=book
         }
         if(row.book.save(flush:true)){

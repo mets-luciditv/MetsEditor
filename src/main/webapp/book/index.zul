@@ -20,6 +20,7 @@
                 <column label="${labels.edit}" hflex="3"></column>
                 <column label="${labels.classCode}" align="center" hflex="4"></column>
                 <column label="${labels.title}" align="center" hflex="4" ></column>
+                <column label="${labels.volume_title}" align="center" hflex="4" ></column>
                 <column label="${labels.author}" align="center"  hflex="4" ></column>
                 <column label="${labels.editor}" align="center" hflex="8"></column>
                 <column label="${labels.publisher}" align="center" hflex="6" ></column>
@@ -35,6 +36,7 @@
                     </cell>
                     <cell><label value="@load(each.book.classCode)"/></cell>
                     <cell><label value="@load(each.book.title)"/></cell>
+                    <cell><label value="@load(each.book.volume_title)"/></cell>
                     <cell><label value="@load(each.book.author)"/></cell>
                     <cell><label value="@load(each.book.editor)"/></cell>
                     <cell><label value="@load(each.book.publisher)"/></cell>
@@ -48,6 +50,7 @@
                         </cell>
                         <cell><textbox value="@load(each.book.classCode) @save(each.book.classCode, before='save')" width="99%" /></cell>
                         <cell><textbox value="@load(each.book.title) @save(each.book.title, before='save')" width="99%" /></cell>
+                        <cell><textbox value="@load(each.book.volume_title) @save(each.book.volume_title, before='save')" width="99%" /></cell>
                         <cell><textbox value="@load(each.book.author) @save(each.book.author, before='save')" width="99%" /></cell>
                         <cell><textbox value="@load(each.book.editor) @save(each.book.editor, before='save')" width="99%" /></cell>
                         <cell><textbox value="@load(each.book.publisher) @save(each.book.publisher, before='save')" width="99%" /></cell>

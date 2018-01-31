@@ -6,7 +6,7 @@
         <north height="50px" border="none" >
             <menubar hflex="1" vflex="1">
                 <menuitem label="${labels.save}" onClick="@command('save')"></menuitem>
-                <menuitem label="publish" onClick="@command('publish')"></menuitem>
+                <menuitem label="${labels.save_publish}" onClick="@command('publish')"></menuitem>
                 <menuitem label="${labels.logout}" href="${request.contextPath}/logout/" style="float:right"></menuitem>
             </menubar>
         </north>
