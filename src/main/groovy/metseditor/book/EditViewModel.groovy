@@ -22,6 +22,7 @@ class EditViewModel {
     def init(){
         def bookId=Long.parseLong(Executions.getCurrent().getParameter("book"))
         book = Book.get(bookId)
+        Executions.current.desktop.getFirstPage().setTitle("${book.title} ${book.volume_title}")
     }
 
     @Command
@@ -32,6 +33,9 @@ class EditViewModel {
     }
     @Command
     def publish(){
+        def _book=Book.get(book.id)
+        _book.content=book.content
+        _book.save(flush:true)
         if(solrService.publish(book)==0)
         {
             Clients.showNotification(Labels.getLabel("publishOK"))

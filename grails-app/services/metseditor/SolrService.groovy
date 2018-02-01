@@ -22,7 +22,7 @@ class SolrService {
         document.addField("html",book.content)
         document.addField("text",extractText("<div>"+book.content+"</div>"))
         document.addField("volume_id","")
-        document.addField("volume_title","")
+        document.addField("volume_title",book.volume_title)
         document.addField("id",book.id)
         def response = solr.add(document)
         if(response.status==0){
@@ -47,7 +47,7 @@ class SolrService {
         //document.addField("lineids","")
         document.addField("text",extractText("<div>"+html+"</div>"))
         document.addField("volume_id","")
-        document.addField("volume_title","")
+        document.addField("volume_title",book.volume_title)
 
         document.addField("id",task.book.id)
         def response = solr.add(document)
